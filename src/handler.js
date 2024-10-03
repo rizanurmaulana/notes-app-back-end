@@ -1,5 +1,5 @@
-const nanoid = require('nanoid');
-const notes = require('./notes');
+const { nanoid } = require("nanoid");
+const notes = require("./notes");
 
 const addNoteHandler = (request, h) => {
   const { title, tags, body } = request.payload;
@@ -24,8 +24,8 @@ const addNoteHandler = (request, h) => {
   if (isSuccess) {
     const response = h
       .response({
-        status: 'success',
-        message: 'Catatan berhasil ditambahkan!',
+        status: "success",
+        message: "Catatan berhasil ditambahkan!",
         data: {
           noteId: id,
         },
@@ -36,8 +36,8 @@ const addNoteHandler = (request, h) => {
 
   const response = h
     .response({
-      status: 'fail',
-      message: 'Gagal menambahkan catatan',
+      status: "fail",
+      message: "Gagal menambahkan catatan",
     })
     .code(500);
   return response;
@@ -57,7 +57,7 @@ const getNoteByIdHandler = (request, h) => {
 
   if (note !== undefined) {
     return {
-      status: 'success',
+      status: "success",
       data: {
         note,
       },
@@ -66,8 +66,8 @@ const getNoteByIdHandler = (request, h) => {
 
   const response = h
     .response({
-      status: 'fail',
-      message: 'Catatan tidak ditemukan',
+      status: "fail",
+      message: "Catatan tidak ditemukan",
     })
     .code(404);
   return response;
@@ -92,8 +92,8 @@ const editNoteByIdHandler = (request, h) => {
 
     const response = h
       .response({
-        status: 'success',
-        message: 'Catatan berhasil diperbarui',
+        status: "success",
+        message: "Catatan berhasil diperbarui",
       })
       .code(200);
     return response;
@@ -101,8 +101,8 @@ const editNoteByIdHandler = (request, h) => {
 
   const response = h
     .response({
-      status: 'fail',
-      message: 'Gagal memperbarui catatan. ID tidak ditemukan',
+      status: "fail",
+      message: "Gagal memperbarui catatan. ID tidak ditemukan",
     })
     .code(404);
   return response;
@@ -115,17 +115,21 @@ const deleteNoteById = (request, h) => {
 
   if (index !== -1) {
     notes.splice(index, 1);
-    const response = h.response({
-      status: 'success',
-      message: 'Catatan berhasil dihapus',
-    }).code(200);
+    const response = h
+      .response({
+        status: "success",
+        message: "Catatan berhasil dihapus",
+      })
+      .code(200);
     return response;
   }
 
-  const response = h.response({
-    status: 'fail',
-    message: 'Catatan gagal dihapus. Id tidak ditemukan'
-  }).code(404);
+  const response = h
+    .response({
+      status: "fail",
+      message: "Catatan gagal dihapus. Id tidak ditemukan",
+    })
+    .code(404);
   return response;
 };
 
